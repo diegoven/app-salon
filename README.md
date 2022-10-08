@@ -6,3 +6,4 @@ Proyecto de práctica para el curso de 'Desarrollo web completo' del profesor Ju
 * HTML
 * JavaScript (Gulp)
 * PHP
+* MySQL
