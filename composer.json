@@ -1,0 +1,19 @@
+{
+    "name": "diego/app-salon_php_mvc_js_sass",
+    "description": "Proyecto PHP 8, MVC, SQL, SASS, Gulp",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "./",
+            "Controller\\" : "./controllers",
+            "Model\\" : "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "Diego Suárez",
+            "email": "diego.suarezg96@gmail.com"
+        }
+    ],
+    "require": {}
+}

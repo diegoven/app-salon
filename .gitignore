@@ -1,3 +1,4 @@
 node_modules
 public
 includes/database.php
+/vendor/
