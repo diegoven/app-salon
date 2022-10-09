@@ -26,8 +26,10 @@ class LoginController
         echo "from recover-password";
     }
 
-    public static function signUp()
+    public static function signUp(Router $router)
     {
-        echo "from sign-up";
+        $router->render('auth/sign-up', [
+            
+        ]);
     }
 }
