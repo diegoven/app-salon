@@ -16,9 +16,11 @@ class LoginController
         echo "from logout";
     }
 
-    public static function forgotPassword()
+    public static function forgotPassword(Router $router)
     {
-        echo "from forgot-password";
+        $router->render('auth/forgot-password', [
+            
+        ]);
     }
 
     public static function recoverPassword()
@@ -29,7 +31,7 @@ class LoginController
     public static function signUp(Router $router)
     {
         $router->render('auth/sign-up', [
-            
+
         ]);
     }
 }
