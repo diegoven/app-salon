@@ -36,6 +36,13 @@ class LoginController
             // Cuando se hace click al botón de 'crear cuenta' se guardan en memoria los datos que existan en los campos del formulario para seguir mostrándolos en la vista
             $usuario->sincronizar($_POST);
             $alertas = $usuario->validarNuevaCuenta();
+
+            if (empty($alertas)) {
+                $resultado = $usuario->existeUsuario();
+
+                if ($resultado->num_rows) $alertas = Usuario::getAlertas();
+                else debuguear('No está registrado');
+            }
         }
 
         $router->render('auth/sign-up', [

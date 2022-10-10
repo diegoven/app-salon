@@ -37,10 +37,21 @@ class Usuario extends ActiveRecord
         if (!$this->nombre) self::$alertas['error'][] = 'El nombre es obligatorio';
         if (!$this->apellido) self::$alertas['error'][] = 'El apellido es obligatorio';
         if (!$this->email) self::$alertas['error'][] = 'El email es obligatorio';
-        
+
         if (!$this->password) self::$alertas['error'][] = 'El password es obligatorio';
         else if (strlen($this->password) < 6) self::$alertas['error'][] = 'El password debe contener al menos 6 caracteres';
 
         return self::$alertas;
+    }
+
+    // Revisa si el usuario ya existe
+    public function existeUsuario()
+    {
+        $query = "SELECT * FROM " . self::$tabla . " WHERE email = '$this->email' LIMIT 1";
+        $resultado = self::$db->query($query);
+
+        if ($resultado->num_rows) self::$alertas['error'][] = "El usuario ya está registrado";
+
+        return $resultado;
     }
 }
