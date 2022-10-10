@@ -30,14 +30,17 @@ class LoginController
     public static function signUp(Router $router)
     {
         $usuario = new Usuario;
+        $alertas = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Cuando se hace click al botón de 'crear cuenta' se guardan en memoria los datos que existan en los campos del formulario para seguir mostrándolos en la vista
             $usuario->sincronizar($_POST);
+            $alertas = $usuario->validarNuevaCuenta();
         }
 
         $router->render('auth/sign-up', [
-            'usuario' => $usuario
+            'usuario' => $usuario,
+            'alertas' => $alertas
         ]);
     }
 }
