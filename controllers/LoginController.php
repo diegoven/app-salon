@@ -87,9 +87,41 @@ class LoginController
         ]);
     }
 
-    public static function recoverPassword()
+    public static function recoverPassword(Router $router)
     {
-        echo "from recover-password";
+        $alertas = [];
+
+        $error = false;
+
+        $token = s($_GET['token']);
+
+        $usuario = Usuario::where('token', $token);
+
+        if (empty($usuario)) {
+            Usuario::setAlerta('error', 'Token no válido');
+            $error = true;
+        }
+
+        // Leer y guardar la nueva contraseña
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $password = new Usuario($_POST);
+            $alertas = $password->validarPassword();
+
+            if (empty($alertas)) {
+                $usuario->password = $password->password;
+                $usuario->hashPassword();
+                $usuario->token = null;
+
+                $resultado = $usuario->guardar();
+                
+                if ($resultado) header('Location: /');
+            }
+        }
+
+        $router->render('auth/recover-password', [
+            'alertas' => $alertas,
+            'error' => $error
+        ]);
     }
 
     public static function signUp(Router $router)
