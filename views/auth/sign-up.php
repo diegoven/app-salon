@@ -4,27 +4,27 @@
 <form action="/sign-up" class="formulario" method="POST">
     <div class="campo">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" placeholder="Tu nombre" name="nombre">
+        <input type="text" id="nombre" placeholder="Tu nombre" name="nombre" value="<?php echo s($usuario->nombre); ?>">
     </div>
 
     <div class="campo">
         <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" placeholder="Tu apellido" name="apellido">
+        <input type="text" id="apellido" placeholder="Tu apellido" name="apellido" value="<?php echo s($usuario->apellido); ?>">
     </div>
 
     <div class="campo">
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" placeholder="66666666" name="telefono">
+        <input type="tel" id="telefono" placeholder="Tu teléfono" name="telefono" value="<?php echo s($usuario->telefono); ?>">
     </div>
 
     <div class="campo">
         <label for="email">E-mail:</label>
-        <input type="email" id="email" placeholder="correo@correo.com" name="email">
+        <input type="email" id="email" placeholder="Tu correo" name="email" value="<?php echo s($usuario->email); ?>">
     </div>
 
     <div class="campo">
         <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" placeholder="Tu contraseña" name="password">
     </div>
 
     <input type="submit" value="Crear cuenta" class="boton">
