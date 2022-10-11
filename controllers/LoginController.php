@@ -97,7 +97,7 @@ class LoginController
 
         $usuario = Usuario::where('token', $token);
 
-        if (empty($usuario)) {
+        if (empty($usuario) || !$usuario->token) {
             Usuario::setAlerta('error', 'Token no válido');
             $error = true;
         }
@@ -113,10 +113,12 @@ class LoginController
                 $usuario->token = null;
 
                 $resultado = $usuario->guardar();
-                
+
                 if ($resultado) header('Location: /');
             }
         }
+
+        $alertas = Usuario::getAlertas();
 
         $router->render('auth/recover-password', [
             'alertas' => $alertas,
