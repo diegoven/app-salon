@@ -1,10 +1,12 @@
-<?php 
+<?php
 
 require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;
+use Controller\APIController;
 use Controller\CitaController;
 use Controller\LoginController;
+
 $router = new Router();
 
 // Log in
@@ -28,6 +30,9 @@ $router->get('/message',  [LoginController::class, 'message']);
 
 // Private section (only for registered users)
 $router->get('/appointment',  [CitaController::class, 'index']);
+
+// Appointments API
+$router->get('/api/services', [APIController::class, 'index']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
