@@ -18,4 +18,6 @@
     </div>
 </body>
 
+<?php echo $script ?? '' ?>
+
 </html>
