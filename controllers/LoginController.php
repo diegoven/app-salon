@@ -34,7 +34,7 @@ class LoginController
 
                             header('Location: /admin');
                         } else {
-                            header('Location: /cita');
+                            header('Location: /appointment');
                         }
                     }
                 } else Usuario::setAlerta('error', 'Usuario no encontrado');
