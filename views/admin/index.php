@@ -6,10 +6,12 @@
     <form class="formulario">
         <div class="campo">
             <label for="fecha">Fecha:</label>
-            <input type="date" name="fecha" id="fecha">
+            <input type="date" name="fecha" id="fecha" value="<?php echo $fecha; ?>">
         </div>
     </form>
 </div>
+
+<?php if (count($citas) === 0) echo "<h2>No hya citas en esta fecha.</h2>"; ?>
 
 <div class="citas-admin">
     <ul class="citas">
@@ -46,3 +48,7 @@
         ?>
     </ul>
 </div>
+
+<?php
+$script = "<script src='build/js/buscador.js'></script>";
+?>
