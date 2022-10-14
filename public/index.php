@@ -5,6 +5,7 @@ require_once __DIR__ . '/../includes/app.php';
 use MVC\Router;
 use Controller\APIController;
 use Controller\CitaController;
+use Controller\AdminController;
 use Controller\LoginController;
 
 $router = new Router();
@@ -30,6 +31,7 @@ $router->get('/message',  [LoginController::class, 'message']);
 
 // Private section (only for registered users)
 $router->get('/appointment',  [CitaController::class, 'index']);
+$router->get('/admin',  [AdminController::class, 'index']);
 
 // Appointments API
 $router->get('/api/services', [APIController::class, 'index']);
