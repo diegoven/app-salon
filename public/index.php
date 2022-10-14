@@ -33,6 +33,7 @@ $router->get('/appointment',  [CitaController::class, 'index']);
 
 // Appointments API
 $router->get('/api/services', [APIController::class, 'index']);
+$router->post('/api/appointments', [APIController::class, 'save']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

@@ -3,6 +3,7 @@ const pasoInicial = 1;
 const pasoFinal = 3;
 
 const cita = {
+  id: "",
   nombre: "",
   fecha: "",
   hora: "",
@@ -28,6 +29,8 @@ function iniciarApp() {
 
   // Consulta la API en el backend de PHP
   consultarAPI();
+
+  idCliente();
 
   // Añade el nombre del cliente al objeto de cita
   nombreCliente();
@@ -168,6 +171,10 @@ function seleccionarServicio(servicio) {
   }
 }
 
+function idCliente() {
+  cita.id = document.querySelector("#id").value;
+}
+
 function nombreCliente() {
   cita.nombre = document.querySelector("#nombre").value;
 }
@@ -285,8 +292,6 @@ function mostrarResumen() {
     day: "numeric",
   });
 
-  console.log(fechaFormateada);
-
   const fechaCita = document.createElement("P");
   fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`;
 
@@ -306,4 +311,45 @@ function mostrarResumen() {
   resumen.appendChild(botonReservar);
 }
 
-function reservarCita() {}
+async function reservarCita() {
+  const { nombre, fecha, hora, servicios, id } = cita;
+  const idServicios = servicios.map((servicio) => servicio.id);
+
+  const datos = new FormData();
+
+  datos.append("usuarioId", id);
+  datos.append("fecha", fecha);
+  datos.append("hora", hora);
+  datos.append("servicios", idServicios);
+
+  try {
+    // Petición hacia la API
+    const url = "http://localhost:3000/api/appointments";
+
+    const respuesta = await fetch(url, {
+      method: "POST",
+      body: datos,
+    });
+
+    const resultado = await respuesta.json();
+
+    if (resultado.resultado) {
+      Swal.fire({
+        icon: "success",
+        title: "Cita creada",
+        text: "Tu cita fue creada correctamente",
+        button: "Ok",
+      }).then(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      });
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Ha ocurrido un error",
+    });
+  }
+}
