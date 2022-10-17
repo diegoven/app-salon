@@ -41,3 +41,16 @@
     }
   }
 }
+
+.barra-servicios {
+  margin: v.$separacion 0;
+
+  @include m.tablet {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .boton {
+    margin: 0 0 1rem 0;
+  }
+}
