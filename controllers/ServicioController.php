@@ -24,6 +24,7 @@ class ServicioController
         session_start();
 
         $servicio = new Servicio();
+        $alertas = [];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $servicio->sincronizar($_POST);
@@ -47,11 +48,29 @@ class ServicioController
     {
         session_start();
 
+        $id = $_GET['id'];
+        if (!is_numeric($id)) return;
+
+        $servicio = Servicio::find($id);
+        $alertas = [];
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $servicio->sincronizar($_POST);
+
+            $alertas = $servicio->validar();
+
+            if (empty($alertas)) {
+                $servicio->guardar();
+                
+                header('Location: /services');
+            }
         }
 
         $router->render('/services/update', [
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'servicio' => $servicio,
+            'alertas' => $alertas
         ]);
     }
 
