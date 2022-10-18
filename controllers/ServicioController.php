@@ -62,7 +62,7 @@ class ServicioController
 
             if (empty($alertas)) {
                 $servicio->guardar();
-                
+
                 header('Location: /services');
             }
         }
@@ -74,9 +74,14 @@ class ServicioController
         ]);
     }
 
-    public static function delete(Router $router)
+    public static function delete()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            $servicio = Servicio::find($id);
+            $servicio->eliminar();
+
+            header('Location: /services');
         }
     }
 }
