@@ -10,6 +10,7 @@ class ServicioController
     public static function index(Router $router)
     {
         session_start();
+        isAdmin();
 
         $servicios = Servicio::all();
 
@@ -22,6 +23,7 @@ class ServicioController
     public static function create(Router $router)
     {
         session_start();
+        isAdmin();
 
         $servicio = new Servicio();
         $alertas = [];
@@ -47,6 +49,7 @@ class ServicioController
     public static function update(Router $router)
     {
         session_start();
+        isAdmin();
 
         $id = $_GET['id'];
         if (!is_numeric($id)) return;
@@ -76,6 +79,9 @@ class ServicioController
 
     public static function delete()
     {
+        session_start();
+        isAdmin();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $servicio = Servicio::find($id);
