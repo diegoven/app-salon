@@ -7,6 +7,7 @@ use Controller\APIController;
 use Controller\CitaController;
 use Controller\AdminController;
 use Controller\LoginController;
+use Controller\ServicioController;
 
 $router = new Router();
 
@@ -37,6 +38,14 @@ $router->get('/admin',  [AdminController::class, 'index']);
 $router->get('/api/services', [APIController::class, 'index']);
 $router->post('/api/appointments', [APIController::class, 'save']);
 $router->post('/api/delete', [APIController::class, 'delete']);
+
+// CRUD for Services
+$router->get('/services', [ServicioController::class, 'index']);
+$router->get('/services/create', [ServicioController::class, 'create']);
+$router->get('/services/update', [ServicioController::class, 'update']);
+$router->post('/services/create', [ServicioController::class, 'create']);
+$router->post('/services/update', [ServicioController::class, 'update']);
+$router->post('/services/delete', [ServicioController::class, 'delete']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
