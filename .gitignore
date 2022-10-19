@@ -1,4 +1,4 @@
 node_modules
 public/build
-includes/database.php
+includes/.env
 vendor
